@@ -16,7 +16,7 @@ public class CameraLook : MonoBehaviour
 
     // Update is called once per frame
 
-    void Update()
+    void LateUpdate()
     {
         //move camera to player
         transform.position = target.position - target.forward * distance + target.up * height;
