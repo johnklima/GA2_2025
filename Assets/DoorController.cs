@@ -19,6 +19,7 @@ public class DoorController : MonoBehaviour
         {
             anim.Play();
             openthedoor = false;
+            this.enabled = false;
         } 
     }
 }
