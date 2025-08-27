@@ -4,6 +4,8 @@ public class DoorController : MonoBehaviour
 {
 
     public bool openthedoor = false;
+   
+    
     private Animation anim;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
