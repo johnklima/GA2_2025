@@ -20,7 +20,9 @@ public class DoorTrigger : MonoBehaviour
     {
         if(isNearDoor && Input.GetKeyDown(KeyCode.E))
         {
-            doorhinge.openthedoor = true;
+            doorhinge.OpenDoor();
+
+            //doorhinge.openthedoor = true;
             //get what time we opened the door
             timer = Time.time;
         }
@@ -28,7 +30,9 @@ public class DoorTrigger : MonoBehaviour
         //wait until 7 seconds has passed
         if(Time.time - timer > 7.0f  && timer > 0)
         {
-            doorhinge.closethedoor = true;
+            doorhinge.CloseDoor();
+            
+            //doorhinge.closethedoor = true;
             //reset timer
             timer = -1;
         }
