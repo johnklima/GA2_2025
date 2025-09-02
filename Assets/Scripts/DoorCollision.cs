@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class DoorCollision : MonoBehaviour
 {
-    public PlayerController control;
+    AudioSource bonk;
+
+    private void Start()
+    {
+       bonk = transform.GetComponent<AudioSource>();
+    }
 
 
     private void OnCollisionEnter(Collision collision)
@@ -10,11 +15,8 @@ public class DoorCollision : MonoBehaviour
 
         if(collision.collider.tag == "Player")
         {
-            
-            Vector3 back = control.transform.forward * -1;
-            control.transform.position = back;   //move player back
-
-
+            Debug.Log("bonk");
+            bonk.Play();
         }
 
         
@@ -23,6 +25,7 @@ public class DoorCollision : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
+
             
         }
 

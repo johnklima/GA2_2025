@@ -8,6 +8,9 @@ public class DoorTrigger : MonoBehaviour
     public DoorControllerAdvanced doorhinge;
     public GameObject backdrop;
 
+    public GameObject keyOpen;
+    public Inventory playerStuff;
+
     private bool isNearDoor = false;
     private bool doorIsOpen = false;
 
@@ -22,15 +25,31 @@ public class DoorTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        bool openit = false;
+
         if(isNearDoor && Input.GetKeyDown(KeyCode.E))
         {
-            doorhinge.OpenDoor();
+            for(int i = 0; i < playerStuff.stuff.Length; i++)
+            {
+                if( playerStuff.stuff[i] == keyOpen)
+                {
+                    openit = true;
+                }
+            }
 
-            //doorhinge.openthedoor = true;
-            //get what time we opened the door
-            timer = Time.time;
+            if(openit)
+            {
+                doorhinge.OpenDoor();
 
-            doorIsOpen = true;
+                //doorhinge.openthedoor = true;
+                //get what time we opened the door
+                timer = Time.time;
+
+                doorIsOpen = true;
+
+            }
+            
         }
 
         //wait until 7 seconds has passed
