@@ -49,6 +49,10 @@ public class DoorTrigger : MonoBehaviour
                 doorIsOpen = true;
 
             }
+            else
+            {
+
+            }
             
         }
 

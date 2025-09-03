@@ -11,6 +11,7 @@ public class CameraContoller : MonoBehaviour
     [Range(0f, 20f)]
     public float mouseSensitivity = 10;
     public float dstFromTarget = 2;
+    public float heightFromTarget = 2;
     public Vector2 pitchMinMax = new Vector2(-40, 85);
     public float rotationSmoothTime = .12f;
 
@@ -86,7 +87,9 @@ public class CameraContoller : MonoBehaviour
         currentRotation = Vector3.SmoothDamp(currentRotation, new Vector3(pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);
         transform.eulerAngles = currentRotation;
 
-        transform.position = target.transform.position - transform.forward * dstFromTarget;
+        transform.position = target.transform.position 
+                             - transform.forward * dstFromTarget
+                             + transform.up * heightFromTarget;
     }
 
     void CameraBreathMovement()
