@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Spaceship : MonoBehaviour
@@ -47,11 +48,16 @@ public class Spaceship : MonoBehaviour
 
         Vector3 angAcceleration = torque / inertia; //again not sure about this constant
 
-        AngularVelocity += angAcceleration * Time.deltaTime * Time.deltaTime;
+        AngularVelocity += angAcceleration * Time.deltaTime * Time.deltaTime;  //dt squared
 
         //yeah yeah deprecated, fuck off
-        transform.rotation *= Quaternion.EulerAngles(AngularVelocity);
+        transform.rotation = transform.rotation * Quaternion.EulerAngles(AngularVelocity);
+        
+        
+        //transform.rotation = Quaternion.Slerp(transform.rotation, quat, 1.0f); //this does the dt squared
 
+        //Quaternion quat  = rotate(AngularVelocity, transform.rotation);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, quat, Time.deltaTime); //this does the dt squared
 
         //reset final force to the initial force of gravity
         finalForce.Set(0, 0, 0);  //start with a gravity vector if desired
@@ -81,5 +87,28 @@ public class Spaceship : MonoBehaviour
         impulse = Vector3.zero;
 
 
+    }
+
+    /// <summary>Apply angular velocity to the quaternion</summary>
+    public Quaternion rotate(Vector3 angularVelocity, Quaternion curQuat)
+    {
+        Vector3 vec = angularVelocity;// * deltaTime;
+        float length = vec.magnitude;
+        if (length < 1E-6F)
+            return curQuat;    // Otherwise we'll have division by zero when trying to normalize it later on
+
+        // Convert the rotation vector to quaternion. The following 4 lines are very similar to CreateFromAxisAngle method.
+        float half = length * 0.5f;
+        float sin = MathF.Sin(half);
+        float cos = MathF.Cos(half);
+        // Instead of normalizing the axis, we multiply W component by the length of it. This method normalizes result in the end.
+        Quaternion q = new Quaternion(vec.x * sin, vec.x * sin, vec.z * sin, length * cos);
+
+        q = q * curQuat;
+        q.Normalize();
+
+        //if (q.w < 0) q = Quaternion.Inverse(q);
+        
+        return q;
     }
 }
