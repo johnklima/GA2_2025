@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+
 public class Spaceship : MonoBehaviour
 {
 
@@ -28,9 +29,17 @@ public class Spaceship : MonoBehaviour
     
     }
 
+    void DebugInputs()
+    {
+       
+
+    }
+
     // Update is called once per frame
     void Update()
     {
+
+        DebugInputs();
         
         //I generally do rotation first, translation second
         Vector3 torque = Vector3.zero;
