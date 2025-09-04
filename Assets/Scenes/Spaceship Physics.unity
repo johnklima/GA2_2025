@@ -268,7 +268,7 @@ Transform:
   m_GameObject: {fileID: 766038624}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -0.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -833,7 +833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1825771420}
   mouseSensitivity: 10
-  dstFromTarget: 20
+  dstFromTarget: 10
   heightFromTarget: 2
   pitchMinMax: {x: -40, y: 85}
   rotationSmoothTime: 0.12
@@ -895,10 +895,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1345646850519418572, guid: 7462891c53078ec4fb1b20cab7f9ae01, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 1537141531251591338, guid: 7462891c53078ec4fb1b20cab7f9ae01, type: 3}
       propertyPath: 'thrusters.Array.data[2]'
       value: 
       objectReference: {fileID: 862862348}
+    - target: {fileID: 1537141531251591338, guid: 7462891c53078ec4fb1b20cab7f9ae01, type: 3}
+      propertyPath: 'thrustForce.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537141531251591338, guid: 7462891c53078ec4fb1b20cab7f9ae01, type: 3}
+      propertyPath: 'thrustForce.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537141531251591338, guid: 7462891c53078ec4fb1b20cab7f9ae01, type: 3}
+      propertyPath: 'thrustForce.Array.data[2]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1734231646516928339, guid: 7462891c53078ec4fb1b20cab7f9ae01, type: 3}
       propertyPath: m_Name
       value: Spaceship
@@ -935,6 +951,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5341070263240312910, guid: 7462891c53078ec4fb1b20cab7f9ae01, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -969,6 +989,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11490fd0a49841a4bb10b7f7a4061d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftStick: {x: 0, y: 0}
+  rightStick: {x: 0, y: 0}
+  leftTrigger: 0
+  rightTrigger: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

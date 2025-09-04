@@ -23,10 +23,19 @@ public class Spaceship : MonoBehaviour
     public float mass = 1.0f;
 
 
+    GamepadInput gamepad;
+    private enum Thruster
+    {
+        LEFT = 0,
+        RIGHT = 1,
+        CENTER = 2,
+    }
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-    
+        gamepad = GetComponent<GamepadInput>();
     }
 
 
@@ -34,6 +43,64 @@ public class Spaceship : MonoBehaviour
     void Update()
     {
 
+        //get stick inputs, rotate thrust 0 and 1 (left right)
+        Vector2 left = gamepad.leftStick;
+        Vector2 right = gamepad.rightStick;
+
+        //for whatever reason (local global?) xy inverted - I prefer working global
+        thrusters[(int)Thruster.LEFT].Rotate(left.y, -left.x, 0);
+        thrusters[(int)Thruster.RIGHT].Rotate(right.y, -right.x, 0);
+        //may also have something to do with my initial rotations of the prims
+
+
+
+        //get current thrust force values and show on yellow spheres (gonna ramp these)
+        //thrustForce[(int)Thruster.LEFT] = 0.0f;
+        //thrustForce[(int)Thruster.RIGHT] = 0.0f;
+        if (gamepad.leftTrigger)
+        {
+            thrustForce[(int)Thruster.LEFT] += Time.deltaTime;
+            if (thrustForce[(int)Thruster.LEFT] > 1.0f)
+                thrustForce[(int)Thruster.LEFT] = 1.0f;
+        }
+        else
+        {
+            thrustForce[(int)Thruster.LEFT] -= Time.deltaTime;
+            if (thrustForce[(int)Thruster.LEFT] < 0.0f)
+                thrustForce[(int)Thruster.LEFT] = 0.0f;
+        }
+
+
+        if (gamepad.rightTrigger)
+        {
+            thrustForce[(int)Thruster.RIGHT] += Time.deltaTime;
+            if (thrustForce[(int)Thruster.RIGHT] > 1.0f)
+                thrustForce[(int)Thruster.RIGHT] = 1.0f;
+        }
+        else
+        {
+            thrustForce[(int)Thruster.RIGHT] -= Time.deltaTime;
+            if (thrustForce[(int)Thruster.RIGHT] < 0.0f)
+                thrustForce[(int)Thruster.RIGHT] = 0.0f;
+        }
+
+
+        //this is totally dependent on your ship geometry, I'm using prims
+        {
+            Vector3 scale = thrusters[(int)Thruster.LEFT].GetChild(0).localScale;
+            scale.Set(scale.x, scale.y, thrustForce[(int)Thruster.LEFT]);
+            thrusters[(int)Thruster.LEFT].GetChild(0).localScale = scale;
+        }
+        {
+            Vector3 scale = thrusters[(int)Thruster.RIGHT].GetChild(0).localScale;
+            scale.Set(scale.x, scale.y, thrustForce[(int)Thruster.RIGHT]);
+            thrusters[(int)Thruster.RIGHT].GetChild(0).localScale = scale;
+        }
+        //created scope here, proly will make it into a method
+
+
+
+        return;
         
         //I generally do rotation first, translation second
         Vector3 torque = Vector3.zero;

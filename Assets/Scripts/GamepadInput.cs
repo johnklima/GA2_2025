@@ -1,9 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// The entire gamepad handler. expose publically what you are interested in
+/// </summary>
 public class GamepadInput : MonoBehaviour
 {
-    
+    //expose what we want
+    public Vector2 leftStick;
+    public Vector2 rightStick;
+    public bool leftTrigger;
+    public bool rightTrigger;
+
     // Update is called once per frame
     void Update()
     {
@@ -13,6 +21,8 @@ public class GamepadInput : MonoBehaviour
             Debug.Log("No gamepad connected.");
             return;
         }
+        if (!gamepad.enabled )
+            return;
 
         if (gamepad.aButton.wasPressedThisFrame)
         {
@@ -78,6 +88,7 @@ public class GamepadInput : MonoBehaviour
 
         //left stick
         Vector2 stickInputL = gamepad.leftStick.ReadValue();
+        leftStick = stickInputL;
         if (stickInputL.magnitude > 0)
             Debug.Log("Left Stick Input: " + stickInputL);
 
@@ -85,9 +96,11 @@ public class GamepadInput : MonoBehaviour
         {
             Debug.Log("Left stick button pressed!");
         }
+  
 
         //right stick
         Vector2 stickInputR = gamepad.rightStick.ReadValue();
+        rightStick = stickInputR;
         if(stickInputR.magnitude > 0)
             Debug.Log("Right Stick Input: " + stickInputR);
         
@@ -98,15 +111,19 @@ public class GamepadInput : MonoBehaviour
 
 
         //right trigger is held down
+        rightTrigger = false;
         if (gamepad.rightTrigger.isPressed)
         {
+            rightTrigger = true;
             Debug.Log("Right Trigger held down.");
         }
 
-        //right trigger is held down
+        //left trigger is held down
+        leftTrigger = false;
         if (gamepad.leftTrigger.isPressed)
         {
             Debug.Log("Left Trigger held down.");
+            leftTrigger = true;
         }
 
         //Left Shoulder is held down
