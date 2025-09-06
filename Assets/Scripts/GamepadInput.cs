@@ -11,6 +11,7 @@ public class GamepadInput : MonoBehaviour
     public Vector2 rightStick;
     public bool leftTrigger;
     public bool rightTrigger;
+    public bool anyDpad;
 
     // Update is called once per frame
     void Update()
@@ -85,6 +86,11 @@ public class GamepadInput : MonoBehaviour
         Vector2 dpad = gamepad.dpad.value;
         if (dpad.magnitude > 0)
             Debug.Log("Dpad Input " + dpad);
+
+        if (dpad.magnitude > 0)
+            anyDpad = true;
+        else
+            anyDpad = false;
 
         //left stick
         Vector2 stickInputL = gamepad.leftStick.ReadValue();

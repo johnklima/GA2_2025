@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 
 public class Spaceship : MonoBehaviour
@@ -85,7 +86,23 @@ public class Spaceship : MonoBehaviour
         }
 
 
-        //this is totally dependent on your ship geometry, I'm using prims
+        if(gamepad.anyDpad)
+        {
+            thrustForce[(int)Thruster.CENTER] += Time.deltaTime;
+            if (thrustForce[(int)Thruster.CENTER] > 1.0f)
+                thrustForce[(int)Thruster.CENTER] = 1.0f;
+        }
+        else
+        {
+            thrustForce[(int)Thruster.CENTER] -= Time.deltaTime;
+            if (thrustForce[(int)Thruster.CENTER] < 0.0f)
+                thrustForce[(int)Thruster.CENTER] = 0.0f;
+        }
+
+
+
+        //this is totally dependent on your ship geometry, I'm using prims for thrusters
+        //next comes a VFX graph!
         {
             Vector3 scale = thrusters[(int)Thruster.LEFT].GetChild(0).localScale;
             scale.Set(scale.x, scale.y, thrustForce[(int)Thruster.LEFT]);
@@ -96,8 +113,13 @@ public class Spaceship : MonoBehaviour
             scale.Set(scale.x, scale.y, thrustForce[(int)Thruster.RIGHT]);
             thrusters[(int)Thruster.RIGHT].GetChild(0).localScale = scale;
         }
+        {
+            Vector3 scale = thrusters[(int)Thruster.CENTER].GetChild(0).localScale;
+            scale.Set(scale.x, scale.y, thrustForce[(int)Thruster.CENTER]);
+            thrusters[(int)Thruster.CENTER].GetChild(0).localScale = scale;
+        }
         //created scope here, proly will make it into a method
-        
+
         //do rotation first, translation second
         Vector3 torque = Vector3.zero;
 
@@ -129,7 +151,7 @@ public class Spaceship : MonoBehaviour
         finalForce.Set(0, 0, 0);  //start with a gravity vector if desired
 
         //accumulate our thrust
-        thrust = Vector3.zero;
+        //thrust = Vector3.zero;
         for(int i = 0; i < thrusters.Length;i++)
         {
             if (thrusters[i])
