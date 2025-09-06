@@ -97,12 +97,8 @@ public class Spaceship : MonoBehaviour
             thrusters[(int)Thruster.RIGHT].GetChild(0).localScale = scale;
         }
         //created scope here, proly will make it into a method
-
-
-
-        return;
         
-        //I generally do rotation first, translation second
+        //do rotation first, translation second
         Vector3 torque = Vector3.zero;
 
         for(int i = 0; i < thrusters.Length; i++)
