@@ -132,7 +132,8 @@ public class Spaceship : MonoBehaviour
         //reset final force to the initial force of gravity
         finalForce.Set(0, 0, 0);  //start with a gravity vector if desired
 
-
+        //accumulate our thrust
+        thrust = Vector3.zero;
         for(int i = 0; i < thrusters.Length;i++)
         {
             if (thrusters[i])
