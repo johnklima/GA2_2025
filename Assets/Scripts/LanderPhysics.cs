@@ -5,20 +5,22 @@ using UnityEngine;
 public class LanderPhysics : MonoBehaviour
 {
 
-    public float inertia = 1;  //a constant depending on shape of object, just going to assume 1 to start
-                               //seems it's just something that is part of the equation
+    //FEEL FREE TO MODIFY THIS SCRIPT, IT IS SIMPLY A SOLID PLACE TO START
 
-    public Vector3 AngularVelocity;
+    public float inertia = 1;  //a constant depending on shape of object, just going to assume 1 to start
+                               //seems it's just something that is part of the equation, 1 works fine
+
+    public Vector3 AngularVelocity;  //how much we are going to spin (if at all)
 
     public Vector3 velocity = new Vector3(0, 0, 0);             //current direction and speed of movement
-    public Vector3 acceleration = new Vector3(0, 0, 0);         //movement controlled by player movement force and gravity
+    public Vector3 acceleration = new Vector3(0, 0, 0);         //increase of movement over time, by player input and gravity
 
     public Vector3 impulse = new Vector3(0, 0, 0);              //additional explosive force
-    public Vector3 thrust = new Vector3(0, 0, 0);               //player applied thrust vector
+    public Vector3 thrust = new Vector3(0, 0, 0);               //player applied thrust vector, part of acceleration
     public Vector3 finalForce = new Vector3(0, 0, 0);           //final force to be applied this frame
     
-    public float mass = 1.0f;
-    public float GRAVITY = -1.6f;                      // -9.8 for earth,  -1.6 for moon 
+    public float mass = 1.0f;            //a constant that doesn't really matter in this case
+    public float GRAVITY = -1.6f;        // -9.8 for earth,  -1.6 for moon, Mars? Jupiter? 
 
     enum Thruster
     {
@@ -36,9 +38,10 @@ public class LanderPhysics : MonoBehaviour
 
     //You will need to create an input mapping as you see fit. WASD and Space should be enough
     //You will also need to make a camera of some sort
-    //You CAN use a rigid body in KINEMATIC mode with no gravity to handle box triggers.
+    //You CAN use a rigid body to handle box triggers and collisions but you CAN NOT use it for propulsion
     //You will need to create a 2 GUI indicating fuel consumption
-    //Your ship has limited fuel, so the player may consume it all and crash
+    //Your ship has limited fuel, so the player may consume it all, and crash
+    //There should be a cut-off velocity where the player is successful if they land gently
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,6 +58,9 @@ public class LanderPhysics : MonoBehaviour
         //torque, or angular acceleration, or spin, same thing
         Vector3 torque = Vector3.zero;
 
+
+        //HINT if you do not want any spin, put the thrusters
+        //at the center of mass (center of the lander object)
         for(int i = 0; i < thrusters.Length; i++)
         {
             if(thrusters[i])
@@ -77,7 +83,13 @@ public class LanderPhysics : MonoBehaviour
         
        
         //reset final force to the initial force of gravity
-        finalForce.Set(0, GRAVITY, 0);  
+        finalForce.Set(0, GRAVITY, 0);
+        
+        
+        
+        //reset thrust such that a thrust on center thruster, opposite to gravity
+        //would hold the ship level, counteracting gravity 
+        thrust.Set(0, 0, 0);
 
 
         for(int i = 0; i < thrusters.Length;i++)
@@ -86,7 +98,11 @@ public class LanderPhysics : MonoBehaviour
             {
                 //add our thrust vectors, mult by scalar (0 would be no thrust on a thruster)
                 thrust += thrusters[i].forward * thrustForce[i];  
-
+                //this is applying a force IN THE DIRECTION of the vector (blue axis)
+                //thus for an upward force, the blue axis of the thruster should be pointing up
+                //however, your particle effect, or however you show the thrust
+                //would be pointing down
+                
             }
         }
 
@@ -96,8 +112,8 @@ public class LanderPhysics : MonoBehaviour
         acceleration = finalForce / mass;
         velocity += acceleration * Time.deltaTime;
 
-        //if we want an explosion that instantly pushes the lander
-        //can simply be zero for no impulse
+        //if we want an explosion that instantly pushes the lander.
+        //zero for no impulse. impulse happens once
         velocity += impulse;  
 
         //move the object
