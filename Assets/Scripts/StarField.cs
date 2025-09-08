@@ -38,7 +38,8 @@ public class StarField : MonoBehaviour {
 
     private void LateUpdate()
     {
-        transform.position = target.position;
+        if(target)
+            transform.position = target.position;
     }
     // Could also do in Update with Time.deltatime scaling.
     private void FixedUpdate() {

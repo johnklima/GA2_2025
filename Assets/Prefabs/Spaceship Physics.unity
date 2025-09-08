@@ -2729,6 +2729,7 @@ MonoBehaviour:
   rightStick: {x: 0, y: 0}
   leftTrigger: 0
   rightTrigger: 0
+  anyDpad: 0
 --- !u!4 &1100354127716814053
 Transform:
   m_ObjectHideFlags: 0
@@ -3107,7 +3108,7 @@ Transform:
   m_GameObject: {fileID: 358188127569601021}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: -10}
+  m_LocalPosition: {x: 0, y: 5, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5506,7 +5507,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358188127569601021}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 033aa728b1379ee489409c01d6e5904e, type: 3}
   m_Name: 
@@ -7592,6 +7593,11 @@ MonoBehaviour:
   thrust: {x: 0, y: 0, z: 0}
   finalForce: {x: 0, y: 0, z: 0}
   mass: 1
+  rectify: 0
+  snapshot: 0
+  SnapshotAngularVelocity: {x: 0, y: 0, z: 0}
+  SnapshotRotation: {x: 0, y: 0, z: 0, w: 0}
+  SnapshotVelocity: {x: 0, y: 0, z: 0}
 --- !u!33 &8755765718876322303
 MeshFilter:
   m_ObjectHideFlags: 0
