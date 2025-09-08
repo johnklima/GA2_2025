@@ -14,6 +14,8 @@ public class NPCnameGenerator : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        Random.InitState(1);
         
         for(int i = 0; i < fullnames.Length; i++)
         {
