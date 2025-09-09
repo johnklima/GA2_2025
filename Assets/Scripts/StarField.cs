@@ -42,13 +42,15 @@ public class StarField : MonoBehaviour {
             transform.position = target.position;
     }
     // Could also do in Update with Time.deltatime scaling.
-    private void FixedUpdate() {
-    if (Input.GetKey(KeyCode.Mouse1)) {
-      Camera.main.transform.RotateAround(Camera.main.transform.position, Camera.main.transform.right, Input.GetAxis("Mouse Y"));
-      Camera.main.transform.RotateAround(Camera.main.transform.position, Vector3.up, -Input.GetAxis("Mouse X"));
+    private void FixedUpdate() 
+    {
+        if (Input.GetKey(KeyCode.Mouse1)) 
+        {
+          Camera.main.transform.RotateAround(Camera.main.transform.position, Camera.main.transform.right, Input.GetAxis("Mouse Y"));
+          Camera.main.transform.RotateAround(Camera.main.transform.position, Vector3.up, -Input.GetAxis("Mouse X"));
+        }
+       
     }
-    return;
-  }
 
   private void OnValidate() {
     if (starObjects != null) {
