@@ -219,7 +219,7 @@ public class Spaceship : MonoBehaviour
         if (joyPressed)
             rectify = 0;
 
-        //now try to stabilize
+        //now try to stabilize, need to think about this...
         if ( !joyPressed)
         {
 
