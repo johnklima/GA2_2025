@@ -18,7 +18,7 @@ public class Spaceship : MonoBehaviour
 
     public Vector3 AngularVelocity;
     
-
+    public Vector3 actualVelocity = new Vector3(0, 0, 0);       //the combined velocity of movement and torque
     public Vector3 velocity = new Vector3(0, 0, 0);             //current direction and speed of movement
     public Vector3 acceleration = new Vector3(0, 0, 0);         //movement controlled by player movement force and gravity
 
@@ -186,8 +186,10 @@ public class Spaceship : MonoBehaviour
 
         //yeah yeah deprecated, fuck off
         transform.rotation = transform.rotation * Quaternion.EulerAngles(AngularVelocity);
+
+        //keep this for slerp out
+        actualVelocity = transform.forward * velocity.magnitude;
         
-                
         //reset final force to the initial force of gravity
         finalForce.Set(0, 0, 0);  //start with a gravity vector if desired
 
@@ -227,14 +229,12 @@ public class Spaceship : MonoBehaviour
             AngularVelocity = Vector3.Lerp(AngularVelocity,Vector3.zero, Time.deltaTime);
 
             //lerp in ship facing to match velocity
-            // get a point from ship pos to velocity
-            Vector3 newfwd = transform.position + velocity * 10.0f ;
+            // get a point from ship current facing to velocity
+            Vector3 newfwd = transform.position + actualVelocity;            
             Quaternion curLook = transform.rotation;
 
             transform.LookAt(newfwd);
-
             Quaternion newLook = transform.rotation;
-
             transform.rotation = curLook;
 
             transform.rotation = Quaternion.Lerp(curLook, newLook, Time.deltaTime);
