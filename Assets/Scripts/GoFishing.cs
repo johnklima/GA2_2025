@@ -31,7 +31,7 @@ public class GoFishing : MonoBehaviour
             if (!isCast)
             {
                 Vector3 fwd = fishCam.transform.forward;
-                body.impulse = (fwd * 10.0f + Vector3.up * 5.0f);
+                body.impulse = (fwd * 10.0f + Vector3.up * 30.0f);
                 endp.parent = null;
 
                 isCast = true;
@@ -46,14 +46,13 @@ public class GoFishing : MonoBehaviour
 
         if(reelItIn)
         {
-
-           
+                      
 
             //reel it in
             Vector3 pos1 = endp.position;
             Vector3 pos2 = transform.position;
 
-            if (Vector3.Distance(pos1, pos2) < 0.1f)
+            if (Vector3.Distance(pos1, pos2) < 2f)
             {
                 //reparent
                 endp.parent = ropeObj;
