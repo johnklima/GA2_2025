@@ -3,8 +3,8 @@ using UnityEngine.UI;
 public class Pickup : MonoBehaviour
 {
     public RawImage img;  //this pickup's image in the 2d gui
-    
-    
+
+    public bool allowPickup = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +20,7 @@ public class Pickup : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        if(other.tag == "Player")
+        if(other.tag == "Player" && allowPickup)
         {
 
             Debug.Log("pickup");
@@ -38,12 +38,13 @@ public class Pickup : MonoBehaviour
 
             }
 
-
+            allowPickup = false;
         }
     }
 
     public void hideImage()
     {
         img.gameObject.SetActive(false);
+        //allowPickup = true;
     }
 }
