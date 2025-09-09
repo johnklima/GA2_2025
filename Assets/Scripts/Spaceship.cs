@@ -6,8 +6,12 @@ using UnityEngine.InputSystem.Controls;
 public class Spaceship : MonoBehaviour
 {
 
+
+    //prealloc for 8, remove in inspector (or not)
     public Transform[] thrusters = new Transform[8];
     public float[] thrustForce = new float[] { 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f } ;
+    public ParticleSystem[] flames = new ParticleSystem[8];
+
 
     public float inertia = 1;  //a constant depending on shape of object, just going to assume 1 to start
                                //seems it's just something that is part of the equation
@@ -77,6 +81,9 @@ public class Spaceship : MonoBehaviour
             if (thrustForce[(int)Thruster.LEFT] > 1.0f)
                 thrustForce[(int)Thruster.LEFT] = 1.0f;
 
+            if(flames[(int)Thruster.LEFT].isStopped)
+                flames[(int)Thruster.LEFT].Play();
+
             joyPressed = true;
         }
         else
@@ -84,7 +91,8 @@ public class Spaceship : MonoBehaviour
             thrustForce[(int)Thruster.LEFT] -= Time.deltaTime;
             if (thrustForce[(int)Thruster.LEFT] < 0.0f)
                 thrustForce[(int)Thruster.LEFT] = 0.0f;
-            
+
+            flames[(int)Thruster.LEFT].Stop();
         }
 
 
@@ -93,6 +101,10 @@ public class Spaceship : MonoBehaviour
             thrustForce[(int)Thruster.RIGHT] += Time.deltaTime;
             if (thrustForce[(int)Thruster.RIGHT] > 1.0f)
                 thrustForce[(int)Thruster.RIGHT] = 1.0f;
+
+            if(flames[(int)Thruster.RIGHT].isStopped)
+                flames[(int)Thruster.RIGHT].Play(); 
+            
             joyPressed = true;
         }
         else
@@ -100,6 +112,8 @@ public class Spaceship : MonoBehaviour
             thrustForce[(int)Thruster.RIGHT] -= Time.deltaTime;
             if (thrustForce[(int)Thruster.RIGHT] < 0.0f)
                 thrustForce[(int)Thruster.RIGHT] = 0.0f;
+
+            flames[(int)Thruster.RIGHT].Stop();
         }
 
 
@@ -108,6 +122,10 @@ public class Spaceship : MonoBehaviour
             thrustForce[(int)Thruster.CENTER] += Time.deltaTime;
             if (thrustForce[(int)Thruster.CENTER] > 1.0f)
                 thrustForce[(int)Thruster.CENTER] = 1.0f;
+
+            if(flames[(int)Thruster.CENTER].isStopped)
+                flames[(int)Thruster.CENTER].Play();
+            
             joyPressed = true;
         }
         else
@@ -115,6 +133,8 @@ public class Spaceship : MonoBehaviour
             thrustForce[(int)Thruster.CENTER] -= Time.deltaTime;
             if (thrustForce[(int)Thruster.CENTER] < 0.0f)
                 thrustForce[(int)Thruster.CENTER] = 0.0f;
+
+            flames[(int)Thruster.CENTER].Stop();
         }
 
         //No input, let's get a picture of the state at this moment

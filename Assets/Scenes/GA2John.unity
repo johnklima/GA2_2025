@@ -1263,6 +1263,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555544893}
   m_CullTransparentMesh: 1
+--- !u!1001 &560951943
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1634767862067424, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: m_Name
+      value: FlameThrower
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
 --- !u!1 &662338216
 GameObject:
   m_ObjectHideFlags: 0
@@ -3096,27 +3153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34281e2164742d444aadc24a137a59e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstNames:
-  - John
-  - Filipe
-  - Paul
-  - Erik
-  - Joshua
-  - Hoda
-  - Bea
-  lastNames:
-  - Smith
-  - Doe
-  - The Viking
-  - The Italian
-  - The Italian
-  - The Viking
-  - The Impaler
-  fullnames:
-  - 
-  - 
-  - 
-  - 
 --- !u!4 &1449585295
 Transform:
   m_ObjectHideFlags: 0
@@ -4141,12 +4177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60d2dc0df7aeb464c98c4191f248cdfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1132186952}
-  speed: 1.5
-  slerporlerp: 0
-  startPos: {x: 0, y: 0, z: 0}
-  startRot: {x: 0, y: 0, z: 0, w: 0}
-  t: 0
 --- !u!65 &1903063812
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4618,3 +4648,4 @@ SceneRoots:
   - {fileID: 1132186952}
   - {fileID: 1449585295}
   - {fileID: 1184493496}
+  - {fileID: 560951943}
