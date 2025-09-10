@@ -5,8 +5,7 @@ public class RopeLength : MonoBehaviour
 {
     public Rope rope;
     public CannonBall ball;
-    public BallGravity ballG;
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -19,8 +18,7 @@ public class RopeLength : MonoBehaviour
         if(collision.collider.tag == "Ground")
         {
             Debug.Log("ball hit");
-            //ball.inAir = false;
-            //ballG.enabled = false;
+            ball.inAir = false;
             rope.ropeLength = 2;
         }
         
