@@ -5,12 +5,12 @@ public class RopeLength : MonoBehaviour
 {
     public Rope rope;
     public CannonBall ball;
-    
+    public float lengthRate = 4.0f;
     // Update is called once per frame
     void Update()
     {
         if (ball.inAir)
-            rope.ropeLength += Time.deltaTime * 5;
+            rope.ropeLength += Time.deltaTime * lengthRate ;
     }
 
     private void OnCollisionEnter(Collision collision)
