@@ -45,6 +45,6 @@ public class Pickup : MonoBehaviour
     public void hideImage()
     {
         img.gameObject.SetActive(false);
-        //allowPickup = true;
+        allowPickup = true;
     }
 }

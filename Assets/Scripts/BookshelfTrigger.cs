@@ -14,35 +14,82 @@ public class BookshelfTrigger : MonoBehaviour
     public float timer = -1;
     public Transform theBook;
     public bool moveTheBook = false;
+    public bool finalizeTheBook = false;
     public Transform player;
+    public Transform target;
+    public Animator doorHinge;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    float t = 0;
+    Quaternion rot1;
+    Quaternion rot2;
+    Vector3 pos1;
+    Vector3 pos2;
+    float bookMoveSpeed = 0.5f;
     void Update()
     {
-
-       
-
+               
+        //this is what is called a finite state machine, or FSM
         if(isNearDoor && Input.GetKeyDown(KeyCode.E))
         {
             //move the book
             theBook.gameObject.SetActive(true);
-            theBook.position = player.transform.position;
+            theBook.position = player.position + Vector3.up + player.right;
             moveTheBook = true;
+
+            //get current rotation/pos           
+            rot1 = theBook.rotation;
+            pos1 = theBook.position;
+            
+            //get final rotation/pos
+            rot2 = target.rotation;
+            pos2 = target.position;
+
+            //begin counting
+            t = 0;
         }
 
         if(moveTheBook)
         {
+            
+            //lerp the rotation/position the T way
+            theBook.rotation = Quaternion.Lerp(rot1, rot2, t);
+            theBook.position = Vector3.Lerp(pos1, pos2, t);
 
-            theBook.position = Vector3.Lerp(theBook.position, transform.position, Time.deltaTime);
+            //lerp the rotation/position the dt way
+            //theBook.rotation = Quaternion.Lerp(theBook.rotation, rot2, Time.deltaTime * bookMoveSpeed);          
+            //theBook.position = Vector3.Lerp(theBook.position, pos2, Time.deltaTime * bookMoveSpeed);
 
+            t += Time.deltaTime * bookMoveSpeed; 
+            if (t > 1)
+            {
+                t = 0;
+                finalizeTheBook = true;
+                moveTheBook = false;
+
+            }
         }
 
+        if (finalizeTheBook)
+        {
+
+            t += Time.deltaTime * bookMoveSpeed;
+            if(t >= 1)
+            {
+                finalizeTheBook = false;
+
+                //child the book to the shelf
+                theBook.parent = target;
+
+                Debug.Log("Open the door");
+                doorHinge.SetTrigger("OpenDoor");
+            }
+            else
+            {
+                //i know the book is inline with the target, so just push the book forward into the shelf
+                theBook.Translate(theBook.forward * Time.deltaTime * bookMoveSpeed, Space.World);
+
+            }
+        }
     }
     
     /*
