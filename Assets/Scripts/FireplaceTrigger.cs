@@ -6,6 +6,7 @@ public class FireplaceTrigger : MonoBehaviour
     public ParticleSystem[] flames;
     public GameObject backdrop;
     public Text message;
+    public string text;
 
     private bool nearFireplace = false;
 
@@ -52,10 +53,10 @@ public class FireplaceTrigger : MonoBehaviour
 
             if (didHit )
             {
-                //if hit and it's a door, pop the message
-                message.text = "press E to put out the fire";
+                //if hit and it's a fireplace, pop the message
+                message.text = text;
                 backdrop.SetActive(true);
-                nearFireplace = true;
+                nearFireplace = true;               
 
             }
             else
@@ -65,7 +66,7 @@ public class FireplaceTrigger : MonoBehaviour
 
             }
 
-            nearFireplace = true;
+            
         }
     }
     private void OnTriggerExit(Collider other)
