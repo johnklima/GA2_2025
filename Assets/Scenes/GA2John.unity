@@ -1169,6 +1169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thestory: []
   curElement: 0
+  storyContainer: {fileID: 543468308261857452}
   text: {fileID: 5915461104540709816}
 --- !u!1 &770020338
 GameObject:
@@ -5624,8 +5625,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5684743708430650691}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.5714998, z: -0, w: 0.82060224}
-  m_LocalPosition: {x: -31.78, y: 2.23, z: -3.47}
+  m_LocalRotation: {x: -0, y: -0.7623629, z: -0, w: -0.64714986}
+  m_LocalPosition: {x: -12.35, y: 0.14, z: 9.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5633,7 +5634,7 @@ Transform:
   - {fileID: 5540252312503800177}
   - {fileID: 1729925142901847566}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -69.71, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -260.654, z: 0}
 --- !u!224 &4297325381155841278
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7285,7 +7286,7 @@ GameObject:
   - component: {fileID: 8540554656697713658}
   - component: {fileID: 2093003895257600282}
   m_Layer: 9
-  m_Name: Ground (2)
+  m_Name: BookGround
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7324,7 +7325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8282203934540694267
 Transform:
   m_ObjectHideFlags: 0
