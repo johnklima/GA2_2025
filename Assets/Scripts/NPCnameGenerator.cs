@@ -9,7 +9,7 @@ public class NPCnameGenerator : MonoBehaviour
 
     //I know I need 4 NPCs
 
-    public string[] fullnames = new string[4];
+    public string[] fullnames ;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
