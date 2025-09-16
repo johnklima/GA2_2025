@@ -11,6 +11,8 @@ public class BookshelfTrigger : MonoBehaviour
     private bool isNearDoor = false;
     private bool doorIsOpen = false;
 
+    public GameObject theKey;
+
     public float timer = -1;
     public Transform theBook;
     public bool moveTheBook = false;
@@ -31,6 +33,35 @@ public class BookshelfTrigger : MonoBehaviour
         //this is what is called a finite state machine, or FSM
         if(isNearDoor && Input.GetKeyDown(KeyCode.E))
         {
+
+            bool hasbook = false;
+            bool haskey = false;
+
+            Inventory inv = player.GetComponent<Inventory>();
+            for(int i = 0; i < inv.stuff.Length; i++)
+            {
+                if (inv.stuff[i] == theBook.gameObject)
+                {
+                    hasbook = true;                   
+                }
+
+                if (inv.stuff[i] == theKey)
+                {
+                    haskey = true;
+                }
+            }
+            
+            if(!hasbook || !haskey)
+            {
+                Debug.Log("AINT GOT THE BOOK Or THE KEY");
+                return;
+            }
+
+
+            inv.placeItem(theBook.gameObject);
+            inv.placeItem(theKey);
+
+
             //move the book
             theBook.gameObject.SetActive(true);
             theBook.position = player.position + Vector3.up + player.right;
