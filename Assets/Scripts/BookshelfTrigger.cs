@@ -11,7 +11,7 @@ public class BookshelfTrigger : MonoBehaviour
     private bool isNearDoor = false;
     private bool doorIsOpen = false;
 
-    public GameObject theKey;
+    
 
     public float timer = -1;
     public Transform theBook;
@@ -35,7 +35,7 @@ public class BookshelfTrigger : MonoBehaviour
         {
 
             bool hasbook = false;
-            bool haskey = false;
+            
 
             Inventory inv = player.GetComponent<Inventory>();
             for(int i = 0; i < inv.stuff.Length; i++)
@@ -45,21 +45,18 @@ public class BookshelfTrigger : MonoBehaviour
                     hasbook = true;                   
                 }
 
-                if (inv.stuff[i] == theKey)
-                {
-                    haskey = true;
-                }
+                
             }
             
-            if(!hasbook || !haskey)
+            if(!hasbook)
             {
-                Debug.Log("AINT GOT THE BOOK Or THE KEY");
+                Debug.Log("AINT GOT THE BOOK");
                 return;
             }
 
 
             inv.placeItem(theBook.gameObject);
-            inv.placeItem(theKey);
+            
 
 
             //move the book

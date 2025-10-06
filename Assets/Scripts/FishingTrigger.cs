@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class FishingTrigger : MonoBehaviour
 {
-
+    Light light;
+    AudioSource audio;
     private Transform player;
     private bool isNearWater = false;
     public Transform fishingTarget;
@@ -67,7 +68,7 @@ public class FishingTrigger : MonoBehaviour
             fishingTarget.gameObject.SetActive(false);
         }
 
-
+        
 
     }
 
